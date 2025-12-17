@@ -28,7 +28,10 @@ import { Task } from './tasks/entities/task.entity';
       password: process.env.POSTGRES_PASSWORD || 'postgres',
       database: process.env.POSTGRES_DB || 'task_management',
       entities: [User, Task],
-      synchronize: process.env.NODE_ENV !== 'production',
+      // Allow overriding synchronize via env for containers/one-off runs.
+      synchronize:
+        process.env.DB_SYNCHRONIZE === 'true' ||
+        process.env.NODE_ENV !== 'production',
       logging: process.env.NODE_ENV === 'development',
     }),
     MongooseModule.forRoot(

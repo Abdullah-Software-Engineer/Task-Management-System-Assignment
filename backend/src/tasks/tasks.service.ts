@@ -6,7 +6,7 @@ import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { User, UserRole } from '../users/entities/user.entity';
 import { EventsService } from '../events/events.service';
-import { WebSocketGateway } from '../websocket/websocket.gateway';
+import { TasksGateway } from '../websocket/websocket.gateway';
 
 @Injectable()
 export class TasksService {
@@ -16,7 +16,7 @@ export class TasksService {
     @InjectRepository(User)
     private usersRepository: Repository<User>,
     private eventsService: EventsService,
-    private webSocketGateway: WebSocketGateway,
+    private webSocketGateway: TasksGateway,
   ) {}
 
   async create(createTaskDto: CreateTaskDto, userId: string): Promise<Task> {

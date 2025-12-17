@@ -24,13 +24,13 @@ export interface TaskUpdateEvent {
   },
   namespace: '/tasks',
 })
-export class WebSocketGateway
+export class TasksGateway
   implements OnGatewayConnection, OnGatewayDisconnect
 {
   @WebSocketServer()
   server: Server;
 
-  private logger: Logger = new Logger('WebSocketGateway');
+  private logger: Logger = new Logger('TasksGateway');
   private connectedUsers = new Map<string, string>(); // socketId -> userId
 
   constructor(

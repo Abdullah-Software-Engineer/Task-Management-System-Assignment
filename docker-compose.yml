@@ -62,6 +62,7 @@ services:
       JWT_EXPIRES_IN: 24h
       PORT: 3001
       NODE_ENV: production
+      DB_SYNCHRONIZE: "true"
       FRONTEND_URL: http://localhost:3000
     ports:
       - "3001:3001"

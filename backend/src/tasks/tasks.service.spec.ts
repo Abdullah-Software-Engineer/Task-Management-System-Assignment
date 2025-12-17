@@ -6,7 +6,7 @@ import { TasksService } from './tasks.service';
 import { Task, TaskStatus, TaskPriority } from './entities/task.entity';
 import { User, UserRole } from '../users/entities/user.entity';
 import { EventsService } from '../events/events.service';
-import { WebSocketGateway } from '../websocket/websocket.gateway';
+import { TasksGateway } from '../websocket/websocket.gateway';
 
 describe('TasksService', () => {
   let service: TasksService;
@@ -78,7 +78,7 @@ describe('TasksService', () => {
           useValue: mockEventsService,
         },
         {
-          provide: WebSocketGateway,
+          provide: TasksGateway,
           useValue: mockWebSocketGateway,
         },
       ],

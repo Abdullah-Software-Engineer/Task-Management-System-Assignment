@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
-import { WebSocketGateway } from './websocket.gateway';
+import { TasksGateway } from './websocket.gateway';
 import { UsersModule } from '../users/users.module';
 
 @Module({
   imports: [UsersModule, JwtModule],
-  providers: [WebSocketGateway],
-  exports: [WebSocketGateway],
+  providers: [TasksGateway],
+  exports: [TasksGateway],
 })
 export class WebSocketModule {}
 
