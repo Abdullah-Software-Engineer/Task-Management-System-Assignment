@@ -19,7 +19,26 @@ export interface TaskUpdateEvent {
 
 @WebSocketGateway({
   cors: {
-    origin: process.env.FRONTEND_URL || 'http://localhost:3000',
+    origin: (origin, callback) => {
+      // Allow requests with no origin
+      if (!origin) return callback(null, true);
+      
+      // In development, allow all origins
+      if (process.env.NODE_ENV !== 'production') {
+        return callback(null, true);
+      }
+      
+      // In production, check against FRONTEND_URL
+      const allowedOrigin = process.env.FRONTEND_URL;
+      if (allowedOrigin && origin === allowedOrigin) {
+        callback(null, true);
+      } else if (!allowedOrigin) {
+        // If no FRONTEND_URL set, allow all in production (not recommended)
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     credentials: true,
   },
   namespace: '/tasks',
